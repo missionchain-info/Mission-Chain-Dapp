@@ -47,6 +47,8 @@ body{
   min-height:100vh;
   overflow-x:hidden;
 }
+img,svg,video,canvas{max-width:100%;height:auto}
+#main,.page,.card,.pkg-card,.nft-card,.mining-hero,.claim-card,.vest-bar,.table-wrap,.tabs,.input-group,.section-head,.ref-box,.balance-row,.network-node,.vest-row{min-width:0}
 
 /* ── NOISE OVERLAY ── */
 body::before{
@@ -695,6 +697,32 @@ tr:hover td{background:rgba(255,255,255,.02)}
   .card-val{font-size:18px}
   .tabs{flex-wrap:wrap}
   .tab{flex:none;padding:8px 12px}
+  .page{padding:12px 10px}
+  #page-nira.active{padding:12px 10px;height:calc(100vh - 56px)}
+  .topbar{height:56px;padding:0 10px 0 54px}
+  .topbar-right{min-width:0;gap:6px}
+  .lang-btn{padding:4px 8px;font-size:11px}
+  .card,.pkg-card,.vest-bar,.mining-hero,.claim-card{padding:14px}
+  .input-group{flex-wrap:wrap}
+  .input-suffix{padding:8px 12px}
+  .table-wrap{-webkit-overflow-scrolling:touch}
+  table{min-width:560px}
+  .nft-stats{grid-template-columns:repeat(2,1fr)}
+  [style*="display:grid;grid-template-columns:1fr 1fr"],
+  [style*="display:grid;grid-template-columns:2fr 1fr"],
+  [style*="display:grid;grid-template-columns:1fr 2fr"]{grid-template-columns:1fr!important}
+  [style*="display:flex;justify-content:space-between"]{flex-wrap:wrap;gap:6px}
+  [style*="display:flex;justify-content:space-between"] > *{min-width:0}
+  .section-head,.ref-box,.balance-row,.network-node,.vest-row{flex-wrap:wrap;gap:8px}
+}
+@media(max-width:430px){
+  .topbar{padding:0 8px 0 50px}
+  .page-title{font-size:14px;letter-spacing:.4px}
+  .price-ticker{display:none}
+  .lang-btn{padding:4px 6px;font-size:10px}
+  .tabs{padding:3px;gap:3px}
+  .tab{padding:7px 10px;font-size:12px}
+  .btn{padding:10px 14px;font-size:10px;letter-spacing:1px}
 }
 
 /* ── SPECIAL ── */
@@ -1410,11 +1438,11 @@ body.vi-active code {
       </div>
       <div class="card">
         <div class="section-title" style="margin-bottom:12px"><span data-i18n="sec_override_calc">🧮 Override Calculator</span></div>
-        <div style="font-size:13px;color:var(--muted);><span data-i18n="lbl_your_rate_colon">Your rate:</span> <strong style="color:var(--gold)">5%</strong> <span data-i18n="lbl_subgrp_b_rate">· Sub-group B rate:</span> <strong style="color:var(--white)">4%</strong> <span data-i18n="lbl_subgrp_vol">· Sub-group volume:</span> <strong style="color:var(--green)">$55,000</strong></div>
+        <div style="font-size:13px;color:var(--muted);"><span data-i18n="lbl_your_rate_colon">Your rate:</span> <strong style="color:var(--gold)">5%</strong> <span data-i18n="lbl_subgrp_b_rate">· Sub-group B rate:</span> <strong style="color:var(--white)">4%</strong> <span data-i18n="lbl_subgrp_vol">· Sub-group volume:</span> <strong style="color:var(--green)">$55,000</strong></div>
         <div class="formula-box">
           <div><span class="key"><span data-i18n="lbl_override_rate">Override Rate</span></span> = <span class="val">5%</span> − <span class="val">4%</span> = <span class="val">1%</span></div>
           <div><span class="key"><span data-i18n="lbl_your_bonus">Your Bonus</span></span> = <span class="val">1%</span> × <span class="val">$55,000</span> = <span class="val">$550 USDT</span></div>
-          <div class="dim"<span data-i18n="lbl_no_double_reward">✓ B receives their full 4% · No volume rewarded twice</span></div>
+          <div class="dim"><span data-i18n="lbl_no_double_reward">✓ B receives their full 4% · No volume rewarded twice</span></div>
         </div>
         <div class="grid-3" style="gap:12px;margin-top:16px">
           <div><label class="input-label"><span data-i18n="lbl_your_rate">Your Rate (%)</span></label><input class="input-field" id="b-myrate" type="number" value="5" oninput="calcBonus()"/></div>
@@ -1513,7 +1541,7 @@ body.vi-active code {
             <div style="background:var(--panel2);border-radius:10px;padding:16px">
               <div class="card-label"><span data-i18n="lbl_ref_f2">Referral (F2)</span></div>
               <div style="font-family:var(--font-display);font-size:24px;color:var(--white)">2%</div>
-              <div style="font-size:12px;color:var(--muted)"<span data-i18n="lbl_on_f1_refs">On F1's referrals</span></div>
+              <div style="font-size:12px;color:var(--muted)"><span data-i18n="lbl_on_f1_refs">On F1's referrals</span></div>
             </div>
           </div>
           <div class="table-wrap" style="margin-top:16px">
@@ -1584,7 +1612,7 @@ body.vi-active code {
     <div class="mining-hero">
       <div class="card-label" style="letter-spacing:3px;margin-bottom:8px"><span data-i18n="sec_hindex_algo">HINDEX ALGORITHM</span></div>
       <div class="mining-rate">1,847,230 MIC</div>
-      <div class="mining-label"><span data-i18n="sec_emission"<span data-i18n="sec_emission">TODAY'S TOTAL EMISSION E(t)</span></span></div>
+      <div class="mining-label"><span data-i18n="sec_emission">TODAY'S TOTAL EMISSION E(t)</span></div>
       <div style="display:flex;justify-content:center;gap:32px;margin-top:24px;position:relative;flex-wrap:wrap">
         <div style="text-align:center"><div style="font-family:var(--font-mono);font-size:14px;color:var(--gold2)">Day 47</div><div class="card-sub"><span data-i18n="lbl_network_age">Network Age</span></div></div>
         <div style="text-align:center"><div style="font-family:var(--font-mono);font-size:14px;color:var(--white)">0.9974</div><div class="card-sub"><span data-i18n="lbl_decay_factor">Decay Factor</span></div></div>
@@ -1655,7 +1683,7 @@ body.vi-active code {
           <div class="card-sub"><span data-i18n="lbl_of_pool">of pool</span></div>
         </div>
         <div style="background:var(--panel2);border-radius:10px;padding:16px;text-align:center">
-          <div class="card-label"<span data-i18n="lbl_today_reward">Today's Reward</span></div>
+          <div class="card-label"><span data-i18n="lbl_today_reward">Today's Reward</span></div>
           <div style="font-family:var(--font-display);font-size:26px;color:var(--green)">500</div>
           <div class="card-sub"><span data-i18n="lbl_mic_earned">MIC earned</span></div>
         </div>
@@ -1772,11 +1800,11 @@ body.vi-active code {
                 <span style="font-family:var(--font-mono);font-size:13px;color:var(--white);font-weight:700;">3</span>
               </div>
               <div style="display:flex;justify-content:space-between;align-items:center;">
-                <span style="font-size:11px;color:var(--muted)><span data-i18n="lbl_staked_colon">Staked:</span> <strong style="color:#C9A84C;">1</strong></span>
+                <span style="font-size:11px;color:var(--muted)"><span data-i18n="lbl_staked_colon">Staked:</span> <strong style="color:#C9A84C;">1</strong></span>
                 <button class="btn btn-sm" style="padding:3px 10px;font-size:10px;border:1px solid #C9A84C;color:#C9A84C;background:rgba(0,0,0,.15);" onclick="showToast('Unstaking 1 MFP-NFT...')"><span data-i18n="btn_unstake">Unstake</span></button>
               </div>
               <div style="display:flex;justify-content:space-between;align-items:center;">
-                <span style="font-size:11px;color:var(--muted)><span data-i18n="lbl_unstaked_colon">Unstaked:</span> <strong style="color:var(--white);">2</strong></span>
+                <span style="font-size:11px;color:var(--muted)"><span data-i18n="lbl_unstaked_colon">Unstaked:</span> <strong style="color:var(--white);">2</strong></span>
                 <button class="btn btn-gold btn-sm" style="padding:3px 10px;font-size:10px;" onclick="showToast('Staking 2 MFP-NFT...')"><span data-i18n="btn_stake">Stake</span></button>
               </div>
             </div>
@@ -1838,11 +1866,11 @@ body.vi-active code {
                 <span style="font-family:var(--font-mono);font-size:13px;color:var(--white);font-weight:700;">3</span>
               </div>
               <div style="display:flex;justify-content:space-between;align-items:center;">
-                <span style="font-size:11px;color:var(--muted)><span data-i18n="lbl_staked_colon">Staked:</span> <strong style="color:#818CF8;">1</strong></span>
+                <span style="font-size:11px;color:var(--muted)"><span data-i18n="lbl_staked_colon">Staked:</span> <strong style="color:#818CF8;">1</strong></span>
                 <button class="btn btn-sm" style="padding:3px 10px;font-size:10px;border:1px solid #818CF8;color:#818CF8;background:rgba(0,0,0,.15);" onclick="showToast('Unstaking 1 Platinum NFT...')"><span data-i18n="btn_unstake">Unstake</span></button>
               </div>
               <div style="display:flex;justify-content:space-between;align-items:center;">
-                <span style="font-size:11px;color:var(--muted)><span data-i18n="lbl_unstaked_colon">Unstaked:</span> <strong style="color:var(--white);">2</strong></span>
+                <span style="font-size:11px;color:var(--muted)"><span data-i18n="lbl_unstaked_colon">Unstaked:</span> <strong style="color:var(--white);">2</strong></span>
                 <button class="btn btn-gold btn-sm" style="padding:3px 10px;font-size:10px;" onclick="showToast('Staking 2 Platinum NFT...')"><span data-i18n="btn_stake">Stake</span></button>
               </div>
             </div>
@@ -1897,11 +1925,11 @@ body.vi-active code {
                 <span style="font-family:var(--font-mono);font-size:13px;color:var(--white);font-weight:700;">3</span>
               </div>
               <div style="display:flex;justify-content:space-between;align-items:center;">
-                <span style="font-size:11px;color:var(--muted)><span data-i18n="lbl_staked_colon">Staked:</span> <strong style="color:#F59E0B;">1</strong></span>
+                <span style="font-size:11px;color:var(--muted)"><span data-i18n="lbl_staked_colon">Staked:</span> <strong style="color:#F59E0B;">1</strong></span>
                 <button class="btn btn-sm" style="padding:3px 10px;font-size:10px;border:1px solid #F59E0B;color:#F59E0B;background:rgba(0,0,0,.15);" onclick="showToast('Unstaking 1 Gold NFT...')"><span data-i18n="btn_unstake">Unstake</span></button>
               </div>
               <div style="display:flex;justify-content:space-between;align-items:center;">
-                <span style="font-size:11px;color:var(--muted)><span data-i18n="lbl_unstaked_colon">Unstaked:</span> <strong style="color:var(--white);">2</strong></span>
+                <span style="font-size:11px;color:var(--muted)"><span data-i18n="lbl_unstaked_colon">Unstaked:</span> <strong style="color:var(--white);">2</strong></span>
                 <button class="btn btn-gold btn-sm" style="padding:3px 10px;font-size:10px;" onclick="showToast('Staking 2 Gold NFT...')"><span data-i18n="btn_stake">Stake</span></button>
               </div>
             </div>
@@ -1957,11 +1985,11 @@ body.vi-active code {
                 <span style="font-family:var(--font-mono);font-size:13px;color:var(--white);font-weight:700;">3</span>
               </div>
               <div style="display:flex;justify-content:space-between;align-items:center;">
-                <span style="font-size:11px;color:var(--muted)><span data-i18n="lbl_staked_colon">Staked:</span> <strong style="color:#9CA3AF;">1</strong></span>
+                <span style="font-size:11px;color:var(--muted)"><span data-i18n="lbl_staked_colon">Staked:</span> <strong style="color:#9CA3AF;">1</strong></span>
                 <button class="btn btn-sm" style="padding:3px 10px;font-size:10px;border:1px solid #9CA3AF;color:#9CA3AF;background:rgba(0,0,0,.15);" onclick="showToast('Unstaking 1 Silver NFT...')"><span data-i18n="btn_unstake">Unstake</span></button>
               </div>
               <div style="display:flex;justify-content:space-between;align-items:center;">
-                <span style="font-size:11px;color:var(--muted)><span data-i18n="lbl_unstaked_colon">Unstaked:</span> <strong style="color:var(--white);">2</strong></span>
+                <span style="font-size:11px;color:var(--muted)"><span data-i18n="lbl_unstaked_colon">Unstaked:</span> <strong style="color:var(--white);">2</strong></span>
                 <button class="btn btn-gold btn-sm" style="padding:3px 10px;font-size:10px;" onclick="showToast('Staking 2 Silver NFT...')"><span data-i18n="btn_stake">Stake</span></button>
               </div>
             </div>
@@ -2371,7 +2399,7 @@ body.vi-active code {
         <div class="card">
           <div class="section-head">
             <div class="section-title"><span data-i18n="sec_mice_listings">MICE License Listings</span></div>
-            <span style="font-family:var(--font-mono);font-size:11px;color:var(--muted)><span data-i18n="lbl_floor">Floor:</span> <span style="color:var(--gold);">$280</span></span>
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--muted)"><span data-i18n="lbl_floor">Floor:</span> <span style="color:var(--gold);">$280</span></span>
           </div>
           <div class="table-wrap">
             <table>
@@ -2390,7 +2418,7 @@ body.vi-active code {
             <div class="section-title" style="margin-bottom:14px;"><span data-i18n="sec_list_mice">List Your MICE</span></div>
             <div class="input-wrap"><label class="input-label"><span data-i18n="lbl_mice_units">MICE Units to Sell</span></label><div class="input-group"><input class="input-field" type="number" value="2" min="1"/><div class="input-suffix">MICE</div></div></div>
             <div class="input-wrap"><label class="input-label"><span data-i18n="lbl_ask_price_unit">Ask Price (USDT / unit)</span></label><div class="input-group"><input class="input-field" type="number" value="490"/><div class="input-suffix">USDT</div></div></div>
-            <div style="background:var(--panel2);border-radius:8px;padding:10px;margin-bottom:12px;font-size:12px;color:var(--muted)><span data-i18n="lbl_days_transfer_fee">Days remaining transfers to buyer. Listing fee:</span> <span style="color:var(--gold);">0.5%</span></div>
+            <div style="background:var(--panel2);border-radius:8px;padding:10px;margin-bottom:12px;font-size:12px;color:var(--muted)"><span data-i18n="lbl_days_transfer_fee">Days remaining transfers to buyer. Listing fee:</span> <span style="color:var(--gold);">0.5%</span></div>
             <button class="btn btn-gold btn-full" onclick="showToast('MICE listed on marketplace!')"><span data-i18n="btn_list_sale">LIST FOR SALE</span></button>
           </div>
           <div class="card">
