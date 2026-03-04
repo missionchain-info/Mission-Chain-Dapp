@@ -33,10 +33,15 @@
   --r2:20px;
   --glow:0 0 30px rgba(201,168,76,0.25);
   --glow2:0 0 60px rgba(91,45,158,0.4);
+  --topbar-h:64px;
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+  --safe-left:env(safe-area-inset-left,0px);
+  --safe-right:env(safe-area-inset-right,0px);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 [data-i18n]{display:inline;}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{
   background:var(--bg);
   color:var(--white);
@@ -45,7 +50,11 @@ body{
   font-weight:400;
   letter-spacing:.2px;
   min-height:100vh;
+  min-height:100dvh;
   overflow-x:hidden;
+  padding-left:var(--safe-left);
+  padding-right:var(--safe-right);
+  padding-bottom:var(--safe-bottom);
 }
 img,svg,video,canvas{max-width:100%;height:auto}
 #main,.page,.card,.pkg-card,.nft-card,.mining-hero,.claim-card,.vest-bar,.table-wrap,.tabs,.input-group,.section-head,.ref-box,.balance-row,.network-node,.vest-row{min-width:0}
@@ -141,7 +150,7 @@ body::before{
   position:sticky;top:0;z-index:90;
   background:rgba(8,5,15,.85);backdrop-filter:blur(20px);
   border-bottom:1px solid var(--border);
-  padding:0 24px 0 64px;height:64px;
+  padding:var(--safe-top) 24px 0 64px;height:calc(var(--topbar-h) + var(--safe-top));
   display:flex;align-items:center;justify-content:space-between;
   overflow:visible;
 }
@@ -630,7 +639,7 @@ tr:hover td{background:rgba(255,255,255,.02)}
 #nira-messages::-webkit-scrollbar-track{background:transparent}
 #nira-messages::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
 /* Nira page flex fix */
-#page-nira.active{display:flex!important;flex-direction:column;height:calc(100vh - 64px);overflow:hidden;padding:20px 28px;}
+#page-nira.active{display:flex!important;flex-direction:column;height:calc(100dvh - var(--topbar-h) - var(--safe-top));overflow:hidden;padding:20px 28px;}
 
 /* ── DOC CARDS hover ── */
 .card:hover .doc-arrow{color:var(--gold)}
@@ -650,7 +659,7 @@ tr:hover td{background:rgba(255,255,255,.02)}
 /* ── SIDEBAR OVERLAY ── */
 #sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:199;backdrop-filter:blur(4px)}
 /* ── MOBILE TOGGLE ── */
-#menu-toggle{display:flex;position:fixed;top:14px;left:14px;z-index:200;
+#menu-toggle{display:flex;position:fixed;top:calc(14px + var(--safe-top));left:14px;z-index:200;
   background:var(--panel);border:1px solid var(--border);border-radius:8px;
   padding:8px;cursor:pointer;color:var(--gold);font-size:20px;}
 /* Tablet */
@@ -686,9 +695,10 @@ tr:hover td{background:rgba(255,255,255,.02)}
 }
 /* Small mobile */
 @media(max-width:600px){
+  body::before,.nft-glow,.nft-rune-ring,.nft-shimmer{display:none!important}
   .topbar-right .price-ticker:last-child{display:none}
   .grid-4{grid-template-columns:1fr}
-  .page-title{font-size:16px;letter-spacing:1px}
+  .page-title{font-size:16px;letter-spacing:1px;max-width:calc(100vw - 140px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .logo-text span:first-child{font-size:11px}
   .sidebar-logo img{width:36px;height:36px}
   .nav-item{padding:10px 14px;font-size:13px}
@@ -698,31 +708,39 @@ tr:hover td{background:rgba(255,255,255,.02)}
   .tabs{flex-wrap:wrap}
   .tab{flex:none;padding:8px 12px}
   .page{padding:12px 10px}
-  #page-nira.active{padding:12px 10px;height:calc(100vh - 56px)}
-  .topbar{height:56px;padding:0 10px 0 54px}
+  #sidebar{width:min(88vw,300px)}
+  #page-nira.active{padding:12px 10px;height:auto!important;min-height:calc(100dvh - var(--topbar-h) - var(--safe-top));overflow:visible}
+  .topbar{--topbar-h:56px;height:calc(var(--topbar-h) + var(--safe-top));padding:var(--safe-top) 10px 0 54px}
   .topbar-right{min-width:0;gap:6px}
   .lang-btn{padding:4px 8px;font-size:11px}
+  .lang-dropdown{min-width:140px;max-width:calc(100vw - 20px)}
   .card,.pkg-card,.vest-bar,.mining-hero,.claim-card{padding:14px}
   .input-group{flex-wrap:wrap}
   .input-suffix{padding:8px 12px}
+  input,select,textarea{font-size:16px!important}
   .table-wrap{-webkit-overflow-scrolling:touch}
-  table{min-width:560px}
+  table{min-width:480px}
+  th{white-space:normal}
   .nft-stats{grid-template-columns:repeat(2,1fr)}
   [style*="display:grid;grid-template-columns:1fr 1fr"],
   [style*="display:grid;grid-template-columns:2fr 1fr"],
-  [style*="display:grid;grid-template-columns:1fr 2fr"]{grid-template-columns:1fr!important}
+  [style*="display:grid;grid-template-columns:1fr 2fr"],
+  [style*="display:grid;grid-template-columns:2fr 1px 1fr"]{grid-template-columns:1fr!important}
   [style*="display:flex;justify-content:space-between"]{flex-wrap:wrap;gap:6px}
   [style*="display:flex;justify-content:space-between"] > *{min-width:0}
   .section-head,.ref-box,.balance-row,.network-node,.vest-row{flex-wrap:wrap;gap:8px}
+  .wallet-addr,.ref-link,.td-mono,.nft-id,.nira-bubble,.input-field{overflow-wrap:anywhere;word-break:break-word}
+  #toast{left:10px;right:10px;max-width:none;bottom:calc(10px + var(--safe-bottom))}
 }
 @media(max-width:430px){
-  .topbar{padding:0 8px 0 50px}
-  .page-title{font-size:14px;letter-spacing:.4px}
+  .topbar{padding:var(--safe-top) 8px 0 50px}
+  .page-title{font-size:14px;letter-spacing:.4px;max-width:calc(100vw - 120px)}
   .price-ticker{display:none}
   .lang-btn{padding:4px 6px;font-size:10px}
   .tabs{padding:3px;gap:3px}
   .tab{padding:7px 10px;font-size:12px}
   .btn{padding:10px 14px;font-size:10px;letter-spacing:1px}
+  table{min-width:420px}
 }
 
 /* ── SPECIAL ── */
@@ -2745,15 +2763,22 @@ function goto(page,el){
 
 // ── TABS ──
 function switchTab(el,name){
-  const parent=el.closest('.page')||el.closest('[id^=page-]')||document;
-  el.closest('.tabs').querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  const tabsWrap = el.closest('.tabs');
+  if(!tabsWrap) return;
+  tabsWrap.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
-  // find tab content in same page scope
-  const all=document.querySelectorAll('[id^=tab-]');
-  const prefix=name.split('-')[0]+'-';
-  all.forEach(t=>{if(t.id.startsWith('tab-'+prefix)||t.id==='tab-'+name){t.style.display='none'}});
-  const target=document.getElementById('tab-'+name);
-  if(target)target.style.display='block';
+
+  const scope = el.closest('.page') || document;
+  const names = Array.from(tabsWrap.querySelectorAll('.tab')).map(t=>{
+    const on = t.getAttribute('onclick') || '';
+    const m = on.match(/switchTab\(this,'([^']+)'\)/);
+    return m ? m[1] : null;
+  }).filter(Boolean);
+
+  names.forEach(n=>{
+    const panel = scope.querySelector('#tab-'+n) || document.getElementById('tab-'+n);
+    if(panel) panel.style.display = n===name ? 'block' : 'none';
+  });
 }
 
 // ── WALLET ──
